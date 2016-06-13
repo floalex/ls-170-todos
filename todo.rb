@@ -95,7 +95,6 @@ post "/lists/:id" do
     erb :edit_list, layout: :layout
   else
     @list[:name] = list_name
-    session[:lists] << { name: list_name, todos: [] }
     session[:success] = "The list has been updated."
     redirect "/lists/#{id}"
   end
