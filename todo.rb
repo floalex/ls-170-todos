@@ -45,7 +45,8 @@ end
 post "/lists" do
   list_name = params[:list_name].strip
 
-  if error = error_for_list_name(list_name)
+  error = error_for_list_name(list_name)
+  if error
     session[:error] = error
     erb :new_list, layout: :layout
   else
@@ -65,4 +66,11 @@ post "/lists" do
   #   session[:success] = "The list has been created"
   #   redirect "/lists"    
   # end
+end
+
+# Display a single todo list
+get "/lists/:id" do
+  id = params[:id].to_i
+  @list = session[:lists][id]
+  erb :list, layout: :layout
 end
